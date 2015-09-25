@@ -11,8 +11,26 @@ import CoreBluetooth
 import RxSwift
 import RxCocoa
 
+let cbCentralManagerDelegateNotSet = CBCentralManagerDelegateNotSet()
+
+class CBCentralManagerDelegateNotSet : NSObject, CBCentralManagerDelegate {
+    
+    var state: CBCentralManagerState! = .Unknown
+    var restoreStateCallback: ((CBCentralManager, [String : AnyObject]!) -> ())?
+    
+    internal func centralManager(central: CBCentralManager, willRestoreState dict: [String : AnyObject]) {
+        restoreStateCallback?(central, dict)
+    }
+    
+    internal func centralManagerDidUpdateState(central: CBCentralManager) {
+        state = central.state
+    }
+}
+
 /// Proxy Object for CBCentralManagerDelegate
 class RxCBCentralManagerDelegateProxy: DelegateProxy, CBCentralManagerDelegate, DelegateProxyType {
+    
+    let state = Variable<CBCentralManagerState!>(CBCentralManagerState.Unknown)
     
     class func currentDelegateFor(object: AnyObject) -> AnyObject? {
         let locationManager: CBCentralManager = object as! CBCentralManager
@@ -25,11 +43,20 @@ class RxCBCentralManagerDelegateProxy: DelegateProxy, CBCentralManagerDelegate, 
     }
     
     internal func centralManagerDidUpdateState(central: CBCentralManager) {
-    
+        state.value = central.state
     }
+    
 }
 
 extension CBCentralManager {
+    
+    public convenience init(withRx queue: dispatch_queue_t?, options: [String : AnyObject]?, restoreStateCallback: ((CBCentralManager, [String : AnyObject]!) -> ())?) {
+        
+        cbCentralManagerDelegateNotSet.restoreStateCallback = restoreStateCallback
+        self.init(delegate: cbCentralManagerDelegateNotSet, queue: queue, options: options)
+        (self.rx_delegate as! RxCBCentralManagerDelegateProxy).state.value = cbCentralManagerDelegateNotSet.state
+    }
+
     
     /**
     Reactive wrapper for `delegate`.
@@ -40,16 +67,28 @@ extension CBCentralManager {
         return proxyForObject(self) as RxCBCentralManagerDelegateProxy
     }
     
+    /**
+    Installs a delegate as forwarding delegate on `rx_delegate`.
+    
+    It enables using normal delegate mechanism with reactive delegate mechanism.
+    
+    - parameter delegate: Delegate object.
+    - returns: Disposable object that can be used to unbind the delegate source.
+    */
+    public func rx_setDelegate(delegate: CBCentralManagerDelegate)
+        -> Disposable {
+            let proxy: RxCBCentralManagerDelegateProxy = proxyForObject(self)
+            
+            return installDelegate(proxy, delegate: delegate, retainDelegate: false, onProxyForObject: self)
+    }
+    
     // MARK: Responding to CB Central Manager
     
     /**
     Reactive wrapper for `delegate` message.
     */
     public var rx_didUpdateState: Observable<CBCentralManagerState!> {
-        return rx_delegate.observe("centralManagerDidUpdateState:")
-            .map { a in
-                return (a[0] as? CBCentralManager)?.state
-        }
+        return (rx_delegate as! RxCBCentralManagerDelegateProxy).state.map {$0}
     }
     
     /**
