@@ -1,6 +1,6 @@
-# RxBrightFutures
+# RxBluetooth
 
-RxBrightFutures is a wrapper around [Core Bluetooth](https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html) that allows to receive data from observables.
+RxBluetooth is a wrapper around [Core Bluetooth](https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html) that allows to receive data from observables.
 
 ## Wrapped delegates
 
