@@ -25,7 +25,7 @@ class RxCBCentralManagerDelegateProxy: DelegateProxy, CBCentralManagerDelegate, 
     }
     
     internal func centralManagerDidUpdateState(central: CBCentralManager) {
-    
+        interceptedSelector("centralManagerDidUpdateState:", withArguments: [central])
     }
 }
 
@@ -37,7 +37,7 @@ extension CBCentralManager {
     For more information take a look at `DelegateProxyType` protocol documentation.
     */
     public var rx_delegate: DelegateProxy {
-        return proxyForObject(self) as RxCBCentralManagerDelegateProxy
+        return proxyForObject(RxCBCentralManagerDelegateProxy.self,self)
     }
     
     // MARK: Responding to CB Central Manager
