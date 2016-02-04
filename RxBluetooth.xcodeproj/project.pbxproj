@@ -7,23 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BEE1DCF2D06AE39CF4A8DB50 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706501F1F4770C953A43029C /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		16BEFDD9BEB7524EDB94F2C2 /* Pods_RxBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77330CF2BC5235AB25382658 /* Pods_RxBluetooth.framework */; };
 		CB5782541BB1878400F65CA9 /* RxBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = CB5782531BB1878400F65CA9 /* RxBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CB5782611BB1A33800F65CA9 /* CBCentralManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5782601BB1A33800F65CA9 /* CBCentralManager+Rx.swift */; settings = {ASSET_TAGS = (); }; };
-		CB5782631BB1A34300F65CA9 /* CBPeripheral+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5782621BB1A34300F65CA9 /* CBPeripheral+Rx.swift */; settings = {ASSET_TAGS = (); }; };
-		CB5782651BB1B9CA00F65CA9 /* CBPeripheralManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5782641BB1B9CA00F65CA9 /* CBPeripheralManager+Rx.swift */; settings = {ASSET_TAGS = (); }; };
+		CB5782611BB1A33800F65CA9 /* CBCentralManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5782601BB1A33800F65CA9 /* CBCentralManager+Rx.swift */; };
+		CB5782631BB1A34300F65CA9 /* CBPeripheral+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5782621BB1A34300F65CA9 /* CBPeripheral+Rx.swift */; };
+		CB5782651BB1B9CA00F65CA9 /* CBPeripheralManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5782641BB1B9CA00F65CA9 /* CBPeripheralManager+Rx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		23FC0C795DE1CEDD9CBA268A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		3A98BBD5BB12E62C4A23663D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		706501F1F4770C953A43029C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77330CF2BC5235AB25382658 /* Pods_RxBluetooth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxBluetooth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B1D0D056B6005986B375714 /* Pods-RxBluetooth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxBluetooth.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxBluetooth/Pods-RxBluetooth.release.xcconfig"; sourceTree = "<group>"; };
 		CB5782501BB1878400F65CA9 /* RxBluetooth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxBluetooth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5782531BB1878400F65CA9 /* RxBluetooth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxBluetooth.h; sourceTree = "<group>"; };
 		CB5782551BB1878400F65CA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB5782601BB1A33800F65CA9 /* CBCentralManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CBCentralManager+Rx.swift"; sourceTree = "<group>"; };
 		CB5782621BB1A34300F65CA9 /* CBPeripheral+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CBPeripheral+Rx.swift"; sourceTree = "<group>"; };
 		CB5782641BB1B9CA00F65CA9 /* CBPeripheralManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CBPeripheralManager+Rx.swift"; sourceTree = "<group>"; };
+		D5EF9682287B27DA72C5219C /* Pods-RxBluetooth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxBluetooth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxBluetooth/Pods-RxBluetooth.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,7 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEE1DCF2D06AE39CF4A8DB50 /* Pods.framework in Frameworks */,
+				16BEFDD9BEB7524EDB94F2C2 /* Pods_RxBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,8 +43,18 @@
 			isa = PBXGroup;
 			children = (
 				706501F1F4770C953A43029C /* Pods.framework */,
+				77330CF2BC5235AB25382658 /* Pods_RxBluetooth.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9B64AE19EDD69BCA42D4776 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D5EF9682287B27DA72C5219C /* Pods-RxBluetooth.debug.xcconfig */,
+				7B1D0D056B6005986B375714 /* Pods-RxBluetooth.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		CB5782461BB1878400F65CA9 = {
@@ -51,8 +62,8 @@
 			children = (
 				CB5782521BB1878400F65CA9 /* RxBluetooth */,
 				CB5782511BB1878400F65CA9 /* Products */,
-				F4BFD7AE47E5BCD0E5E67F59 /* Pods */,
 				9CDBFF7C03E15B59DD380FDA /* Frameworks */,
+				C9B64AE19EDD69BCA42D4776 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,15 +95,6 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
-		F4BFD7AE47E5BCD0E5E67F59 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3A98BBD5BB12E62C4A23663D /* Pods.debug.xcconfig */,
-				23FC0C795DE1CEDD9CBA268A /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -111,12 +113,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CB5782581BB1878400F65CA9 /* Build configuration list for PBXNativeTarget "RxBluetooth" */;
 			buildPhases = (
-				3FCD6082DFB12D8F97BE7651 /* Check Pods Manifest.lock */,
+				A4B14C44F46E38949370D4FF /* Check Pods Manifest.lock */,
 				CB57824B1BB1878400F65CA9 /* Sources */,
 				CB57824C1BB1878400F65CA9 /* Frameworks */,
 				CB57824D1BB1878400F65CA9 /* Headers */,
 				CB57824E1BB1878400F65CA9 /* Resources */,
-				216B2AC1A08DC9EBC2FC7435 /* Copy Pods Resources */,
+				9F9F1556DC46CFFC2392AA7A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,7 +172,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		216B2AC1A08DC9EBC2FC7435 /* Copy Pods Resources */ = {
+		9F9F1556DC46CFFC2392AA7A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -182,10 +184,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RxBluetooth/Pods-RxBluetooth-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3FCD6082DFB12D8F97BE7651 /* Check Pods Manifest.lock */ = {
+		A4B14C44F46E38949370D4FF /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -307,7 +309,7 @@
 		};
 		CB5782591BB1878400F65CA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A98BBD5BB12E62C4A23663D /* Pods.debug.xcconfig */;
+			baseConfigurationReference = D5EF9682287B27DA72C5219C /* Pods-RxBluetooth.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -326,7 +328,7 @@
 		};
 		CB57825A1BB1878400F65CA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23FC0C795DE1CEDD9CBA268A /* Pods.release.xcconfig */;
+			baseConfigurationReference = 7B1D0D056B6005986B375714 /* Pods-RxBluetooth.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
