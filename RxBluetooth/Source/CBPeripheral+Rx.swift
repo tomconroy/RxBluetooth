@@ -73,10 +73,10 @@ extension CBPeripheral {
     Reactive wrapper for `delegate` message.
     */
 
-    public var rx_didDiscoverServices: Observable<NSError?> {
+    public var rx_didDiscoverServices: Observable<([CBService]?, NSError?)> {
         return rx_delegate.observe("peripheral:didDiscoverServices:")
             .map { a in
-                return (a[1] as? NSError)
+                return (self.services, a[1] as? NSError)
         }
     }
 

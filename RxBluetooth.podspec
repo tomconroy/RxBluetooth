@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RxBluetooth"
-  s.version      = '0.1'
+  s.version      = '0.2'
   s.license      = 'MIT'
   s.platform     = :ios, "8.0"
   s.summary      = 'RxSwift CoreBluetooth'
@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.source_files = ["RxBluetooth/Source/*swift"]
   s.requires_arc = true
 
-  s.dependency "RxSwift", "~> 2.0.0-alpha"
-  s.dependency "RxCocoa", "~> 2.0.0-alpha"
+  s.dependency "RxSwift", "~> 2.1.0"
+  s.dependency "RxCocoa", "~> 2.1.0"
 end
