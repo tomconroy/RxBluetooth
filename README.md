@@ -10,6 +10,22 @@ The following delegates are wrapped:
 * `CBPeripheralDelegate`
 * `CBPeripheralManagerDelegate`
 
+## Installation
+
+### CocoaPods
+
+Podfile
+```
+pod 'RxBluetooth', '~> 0.3'
+```
+
+### Carthage
+
+Cartfile
+```
+github "SideEffects-xyz/RxBluetooth"
+```
+
 ### Contributions
 
 Contributions are welcomed in the `develop` repository. Any pull-request to the `master` branch will be rejected.
