@@ -38,7 +38,7 @@ extension CBPeripheralManager {
     For more information take a look at `DelegateProxyType` protocol documentation.
     */
     public var rx_delegate: DelegateProxy {
-        return proxyForObject(RxCBPeripheralDelegateProxy.self, self)
+        return proxyForObject(RxCBPeripheralManagerDelegateProxy.self, self)
 
     }
     
@@ -48,7 +48,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didUpdateState: Observable<CBPeripheralManagerState!> {
-        return rx_delegate.observe("centralManagerDidUpdateState:")
+        return rx_delegate.observe("peripheralManagerDidUpdateState:")
             .map { a in
                 return (a[0] as? CBPeripheralManager)?.state
         }
