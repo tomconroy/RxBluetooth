@@ -14,18 +14,25 @@ import RxCocoa
 /// Proxy Object for CBCentralManagerDelegate
 class RxCBPeripheralManagerDelegateProxy: DelegateProxy, CBPeripheralManagerDelegate, DelegateProxyType {
     
+    let _didUpdateState = ReplaySubject<CBPeripheralManagerState>.create(bufferSize: 1)
+    
     class func currentDelegateFor(object: AnyObject) -> AnyObject? {
-        let locationManager: CBPeripheralManager = object as! CBPeripheralManager
-        return locationManager.delegate
+        let peripheralManager: CBPeripheralManager = object as! CBPeripheralManager
+        return peripheralManager.delegate
     }
     
     class func setCurrentDelegate(delegate: AnyObject?, toObject object: AnyObject) {
-        let locationManager: CBPeripheralManager = object as! CBPeripheralManager
-        locationManager.delegate = delegate as? CBPeripheralManagerDelegate
+        let peripheralManager: CBPeripheralManager = object as! CBPeripheralManager
+        peripheralManager.delegate = delegate as? RxCBPeripheralManagerDelegateProxy
     }
     
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
-        interceptedSelector("peripheralManagerDidUpdateState:", withArguments: [peripheral])
+        _didUpdateState.on(.Next(peripheral.state))
+        self._forwardToDelegate?.peripheralManagerDidUpdateState?(peripheral)
+    }
+    
+    deinit {
+        _didUpdateState.on(.Completed)
     }
 
 }
@@ -39,7 +46,6 @@ extension CBPeripheralManager {
     */
     public var rx_delegate: DelegateProxy {
         return proxyForObject(RxCBPeripheralManagerDelegateProxy.self, self)
-
     }
     
     // MARK: Responding to CB Peripheral Manager
@@ -47,11 +53,9 @@ extension CBPeripheralManager {
     /**
     Reactive wrapper for `delegate` message.
     */
-    public var rx_didUpdateState: Observable<CBPeripheralManagerState!> {
-        return rx_delegate.observe("peripheralManagerDidUpdateState:")
-            .map { a in
-                return (a[0] as? CBPeripheralManager)?.state
-        }
+    public var rx_didUpdateState: ControlEvent<CBPeripheralManagerState> {
+        let proxy = proxyForObject(RxCBPeripheralManagerDelegateProxy.self, self)
+        return ControlEvent(events: proxy._didUpdateState)
     }
     
     /**

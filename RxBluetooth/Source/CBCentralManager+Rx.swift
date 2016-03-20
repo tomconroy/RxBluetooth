@@ -14,18 +14,25 @@ import RxCocoa
 /// Proxy Object for CBCentralManagerDelegate
 class RxCBCentralManagerDelegateProxy: DelegateProxy, CBCentralManagerDelegate, DelegateProxyType {
     
+    let _didUpdateState = ReplaySubject<CBCentralManagerState>.create(bufferSize: 1)
+    
     class func currentDelegateFor(object: AnyObject) -> AnyObject? {
-        let locationManager: CBCentralManager = object as! CBCentralManager
-        return locationManager.delegate
+        let centralManager: CBCentralManager = object as! CBCentralManager
+        return centralManager.delegate
     }
     
     class func setCurrentDelegate(delegate: AnyObject?, toObject object: AnyObject) {
-        let locationManager: CBCentralManager = object as! CBCentralManager
-        locationManager.delegate = delegate as? CBCentralManagerDelegate
+        let centralManager: CBCentralManager = object as! CBCentralManager
+        centralManager.delegate = delegate as? CBCentralManagerDelegate
     }
     
     internal func centralManagerDidUpdateState(central: CBCentralManager) {
-        interceptedSelector("centralManagerDidUpdateState:", withArguments: [central])
+        _didUpdateState.on(.Next(central.state))
+        self._forwardToDelegate?.centralManagerDidUpdateState?(central)
+    }
+    
+    deinit {
+        _didUpdateState.on(.Completed)
     }
 }
 
@@ -45,11 +52,9 @@ extension CBCentralManager {
     /**
     Reactive wrapper for `delegate` message.
     */
-    public var rx_didUpdateState: Observable<CBCentralManagerState!> {
-        return rx_delegate.observe("centralManagerDidUpdateState:")
-            .map { a in
-                return (a[0] as? CBCentralManager)?.state
-        }
+    public var rx_didUpdateState: ControlEvent<CBCentralManagerState> {
+        let proxy = proxyForObject(RxCBCentralManagerDelegateProxy.self,self)
+        return ControlEvent(events: proxy._didUpdateState)
     }
     
     /**
