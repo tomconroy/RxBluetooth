@@ -45,7 +45,7 @@ extension CBPeripheralManager {
     For more information take a look at `DelegateProxyType` protocol documentation.
     */
     public var rx_delegate: DelegateProxy {
-        return proxyForObject(RxCBPeripheralManagerDelegateProxy.self, self)
+        return RxCBCentralManagerDelegateProxy(parentObject: self)
     }
     
     // MARK: Responding to CB Peripheral Manager
@@ -54,7 +54,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didUpdateState: ControlEvent<CBPeripheralManagerState> {
-        let proxy = proxyForObject(RxCBPeripheralManagerDelegateProxy.self, self)
+        let proxy = RxCBPeripheralManagerDelegateProxy(parentObject: self)
         return ControlEvent(events: proxy._didUpdateState)
     }
     
@@ -62,7 +62,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_willRestoreState: Observable<[String : AnyObject]!> {
-        return rx_delegate.observe("peripheralManager:willRestoreState:")
+        return rx_delegate.observe(#selector(CBPeripheralManagerDelegate.peripheralManager(_:willRestoreState:)))
             .map { a in
                 return a[1] as? [String : AnyObject]
         }
@@ -72,7 +72,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didStartAdvertising: Observable<NSError?> {
-        return rx_delegate.observe("peripheralManagerDidStartAdvertising:error:")
+        return rx_delegate.observe(#selector(CBPeripheralManagerDelegate.peripheralManagerDidStartAdvertising(_:error:)))
             .map { a in
                 return (a[1] as? NSError)
         }
@@ -82,7 +82,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didAddService: Observable<(CBService!, NSError?)> {
-        return rx_delegate.observe("peripheralManager:didAddService:error:")
+        return rx_delegate.observe(#selector(CBPeripheralManagerDelegate.peripheralManager(_:didAddService:error:)))
             .map { a in
                 return (a[1] as? CBService, a[2] as? NSError)
         }
@@ -92,7 +92,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didSubscribeToCharacteristic: Observable<(CBCentral!, CBCharacteristic!)> {
-        return rx_delegate.observe("peripheralManager:central:didSubscribeToCharacteristic:")
+        return rx_delegate.observe(#selector(CBPeripheralManagerDelegate.peripheralManager(_:central:didSubscribeToCharacteristic:)))
             .map { a in
                 return (a[1] as? CBCentral, a[2] as? CBCharacteristic)
         }
@@ -102,7 +102,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didUnsubscribeFromCharacteristic: Observable<(CBCentral!, CBCharacteristic!)> {
-        return rx_delegate.observe("peripheralManager:central:didUnsubscribeFromCharacteristic:")
+        return rx_delegate.observe(#selector(CBPeripheralManagerDelegate.peripheralManager(_:central:didUnsubscribeFromCharacteristic:)))
             .map { a in
                 return (a[1] as? CBCentral, a[2] as? CBCharacteristic)
         }
@@ -112,7 +112,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didReceiveReadRequest: Observable<CBATTRequest!> {
-        return rx_delegate.observe("peripheralManager:didReceiveReadRequest:")
+        return rx_delegate.observe(#selector(CBPeripheralManagerDelegate.peripheralManager(_:didReceiveReadRequest:)))
             .map { a in
                 return (a[1] as? CBATTRequest)
         }
@@ -122,7 +122,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didReceiveWriteRequests: Observable<[CBATTRequest]!> {
-        return rx_delegate.observe("peripheralManager:didReceiveWriteRequests:")
+        return rx_delegate.observe(#selector(CBPeripheralManagerDelegate.peripheralManager(_:didReceiveWriteRequests:)))
             .map { a in
                 return (a[1] as? [CBATTRequest])
         }
@@ -132,7 +132,7 @@ extension CBPeripheralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_isReadyToUpdateSubscribers: Observable<Void> {
-        return rx_delegate.observe("peripheralManagerIsReadyToUpdateSubscribers:")
+        return rx_delegate.observe(#selector(CBPeripheralManagerDelegate.peripheralManagerIsReadyToUpdateSubscribers(_:)))
             .map { a in
                 return ()
         }
